@@ -1,0 +1,138 @@
+openapi: 3.0.1
+info:
+  title: Task API
+  description: praktek dokumentasi Task API
+  version: 1.0.0
+  contact:
+    email: fd2chapter5@gmail.com
+servers:
+  - url: http://localhost:8001/v1
+paths:
+  /tasks:
+    post:
+      summary: Create a new task
+      description: Creates a new task in the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+    get:
+      summary: Get all tasks
+      description: Retrieves all tasks from the system
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+  /tasks/{task_id}:
+    parameters:
+      - schema:
+          type: integer
+        name: task_id
+        in: path
+        required: true
+    get:
+      summary: Get a task by ID
+      description: Retrieves a task from the system by its ID
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+    put:
+      summary: Update a task by ID
+      description: Updates a task in the system by its ID
+      parameters:
+        - schema:
+            type: integer
+          name: task_id
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+    delete:
+      summary: Delete a task by ID
+      description: Deletes a task from the system by its ID
+      parameters:
+        - schema:
+            type: integer
+          name: task_id
+          in: path
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        404:
+          description: Task with the given ID not found
+        500:
+          description: An error occurred on the server
+  /search:
+    get:
+      summary: Search for tasks
+      description: Searches for tasks based on a keyword
+      parameters:
+        - schema:
+            type: string
+          name: keyword
+          in: query
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'    
+components:
+  schemas:
+    Task:
+      title: Task
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 6
+        name:
+          type: string
+          example: task hari ini
+        description:
+          type: string
+          example: belajar dokumentasi API
+        due_date:
+          type: string
+          example: 30-03-2024
+        is_completed:
+          type: boolean
+          example: true

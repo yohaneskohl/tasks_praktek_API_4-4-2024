@@ -1,0 +1,40 @@
+### Create Data
+POST http://localhost:8001/v1/tasks
+Content-Type: application/json
+
+{
+  "title": "Task",
+  "description": "Description task",
+  "due_date": "30-03-2024",
+  "is_completed": true
+}
+
+### List All Resource
+GET http://localhost:8001/v1/tasks
+
+### Getting a resource
+GET http://localhost:8001/v1/tasks/88
+
+### Getting a resource search
+GET http://localhost:8001/v1/search?keyword=Up
+
+### Updating a resource
+PUT http://localhost:8001/v1/tasks/8
+Content-Type: application/json
+
+{
+  "title" : "Task 2",
+  "description" : "Desc Updated",
+  "due_date": "30-03-2024",
+  "is_completed": true
+}
+
+### Deleting a resource
+DELETE http://localhost:8001/tasks/12
+
+
+### Pagination
+GET http://localhost:8001/v1/tasks
+
+### Pagination
+GET http://localhost:8001/v1/tasks?keyword=Description&page=1&limit=5
